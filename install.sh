@@ -55,14 +55,14 @@ git clone https://github.com/mkylmamaa/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 git clone https://github.com/mkylmamaa/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 # install powerline fonts
-#git clone https://github.com/mkylmamaa/fonts.git
+git clone https://github.com/mkylmamaa/fonts.git
 
 # set permissions in case they were not preserved
 chmod 600 ~/.vimrc
 chmod 600 ~/.tmux.conf
 chmod 600 ~/.zshrc
 chmod 600 ~/.zshrc.autocd
-chmod -R 700 ~/.oh-my.zsh
+chmod -R 700 ~/.oh-my-zsh
 chmod -R 700 ~/.spcrc
 chmod -R 700 ~/.tmux
 chmod -R 700 ~/.vim
@@ -71,7 +71,13 @@ chmod -R 700 ~/.vim
 chsh -s $(which tmux)
 
 # install powerline fonts
-if [ -x "$(command -v PowerShell.exe)" ]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    (cd fonts && ./install.sh)
+	echo "Please choose the desired font for your shell in the terminal preferences"
+elif [ -x "$(command -v PowerShell.exe)" ]; then
 	(cd fonts && PowerShell.exe -ExecutionPolicy Bypass -File "install.ps1")
 	echo "Please choose the desired font for your shell in Properties->Font!"
+else
+    echo "Unknown platform, unable to install Powerline fonts!"
 fi
+
