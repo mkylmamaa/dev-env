@@ -103,6 +103,7 @@ filetype plugin on
 :set backspace=2
 :set mouse-=a
 :set clipboard=unnamed
+:set nofixendofline
 
 if has("gui_running")
 	:set fu
